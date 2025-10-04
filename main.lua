@@ -83,5 +83,5 @@ credit.Position = UDim2.new(0, 0, 1, -15)
 credit.BackgroundTransparency = 1
 credit.Text = "by Gonzales Official"
 credit.Font = Enum.Font.Gotham
-credit.TextSize = 10
+credit.TextSize = 9
 credit.TextColor3 = Color3.fromRGB(180, 180, 180)
