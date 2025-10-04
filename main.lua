@@ -1,4 +1,4 @@
--- Performance Hub | Small UI like REDZ/Xeter | by Gonzales Official
+-- Performance Hub | Small UI like REDZ/Xeter (X / -) | by Gonzales Official
 
 local plr = game:GetService("Players").LocalPlayer
 local gui = Instance.new("ScreenGui", plr:WaitForChild("PlayerGui"))
@@ -65,16 +65,15 @@ end
 
 -- FPS Boost (60 → 120)
 local function boostFPS(active)
-	if active then
-		setfpscap(120)
+	if activTextLabelsetfpscap(120)
 	else
 		setfpscap(60)
 	end
 end
 
 -- Create Buttons
-makeBtn("Anti-Lag", 30, antiLag)
-makeBtn("Boost FPS", 62, boostFPS)
+makeBtn("Anti-Lag", 25, antiLag)
+makeBtn("Boost FPS", 120, boostFPS)
 
 -- Credit
 local credit = Instance.new("TextLabel", main)
