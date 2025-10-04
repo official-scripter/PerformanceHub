@@ -1,4 +1,4 @@
--- Performance Hub | Small UI like REDZ/open Gonzales Official
+-- Performance Hub | Small UI like REDZ/Xeter | by Gonzales Official
 
 local plr = game:GetService("Players").LocalPlayer
 local gui = Instance.new("ScreenGui", plr:WaitForChild("PlayerGui"))
@@ -13,71 +13,70 @@ main.BorderSizePixel = 0
 main.Active = true
 main.Draggable = true
 
--- Corners & Outline
+-- Corner + Outline
 local corner = Instance.new("UICorner", main)
 corner.CornerRadius = UDim.new(0, 10)
-local stroke = Instance.new("UIStroke", main)
-stroke.Thickness = 1.2
-stroke.Color = Color3.fromRGB(100, 100, 255)
+local outline = Instance.new("UIStroke", main)
+outline.Thickness = 1.2
+outline.Color = Color3.fromRGB(100, 100, 255)
 
--- Title Bar
+-- Title
 local title = Instance.new("TextLabel", main)
-title.Size = UDim2.new(1, -25, 0, 25)
+title.Size = UDim2.new(1, 0, 0, 25)
 title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 title.Text = "PERFORMANCE HUB"
 title.Font = Enum.Font.GothamBold
 title.TextSize = 12
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.TextXAlignment = Enum.TextXAlignment.Left
-title.Position = UDim2.new(0, 10, 0, 0)
 local titleCorner = Instance.new("UICorner", title)
 titleCorner.CornerRadius = UDim.new(0, 10)
 
--- Close/Open Button
-local toggleBtn = Instance.new("TextButton", main)
-toggleBtn.Size = UDim2.new(0, 25, 0, 25)
-toggleBtn.Position = UDim2.new(1, -25, 0, 0)
-toggleBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-toggleBtn.Text = "x"
-toggleBtn.Font = Enum.Font.GothamBold
-toggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-toggleBtn.TextSize = 14
-local toggleCorner = Instance.new("UICorner", toggleBtn)
-toggleCorner.CornerRadius = UDim.new(0, 10)
+-- Button Creator
+local function makeBtn(txt, posY, func)
+	local btn = Instance.new("TextButton", main)
+	btn.Size = UDim2.new(1, -20, 0, 28)
+	btn.Position = UDim2.new(0, 10, 0, posY)
+	btn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	btn.Text = txt.." -"
+	btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	btn.Font = Enum.Font.GothamSemibold
+	btn.TextSize = 13
+	btn.AutoButtonColor = false
+	local corner = Instance.new("UICorner", btn)
+	corner.CornerRadius = UDim.new(0, 8)
 
--- Main content
-local content = Instance.new("Frame", main)
-content.Size = UDim2.new(1, 0, 1, -25)
-content.Position = UDim2.new(0, 0, 0, 25)
-content.BackgroundTransparency = 1
+	local on = false
+	btn.MouseButton1Click:Connect(function()
+		on = on
+		btn.Text = txt .. (on and " x" or " -")
+		btn.BackgroundColor3 = on and Color3.fromRGB(0, 180, 0) or Color3.fromRGB(50, 50, 50)
+		func(on)
+	end)
+end
 
--- Info label
-local info = Instance.new("TextLabel", content)
-info.Size = UDim2.new(1, 0, 0, 30)
-info.Position = UDim2.new(0, 0, 0, 10)
-info.BackgroundTransparency = 1
-info.Text = "Anti-Lag + FPS 120 Enabled"
-info.Font = Enum.Font.GothamSemibold
-info.TextColor3 = Color3.fromRGB(0, 255, 0)
-info.TextSize = 13
-
--- Apply optimizations
-for _, v in pairs(workspace:GetDescendants()) do
-	if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") then
-		v.Enabled = false
+-- Anti-Lag
+local function antiLag(active)
+	for _, v in pairs(workspace:GetDescendants()) do
+		if v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Beam") then
+			v.Enabled = not active
+		end
 	end
 end
-if setfpscap then setfpscap(120) end
 
--- Minimize / Open behavior
-local open = true
-toggleBtn.MouseButton1Click:Connect(function()
-	open = not open
-	toggleBtn.Text = open and "x" or "-"
-	content.Visible = not open
-end)
+-- FPS Boost (60 → 120)
+local function boostFPS(active)
+	if active then
+		setfpscap(120)
+	else
+		setfpscap(60)
+	end
+end
 
--- Credit label
+-- Create Buttons
+makeBtn("Anti-Lag", 60, antiLag)
+makeBtn("Boost FPS", 60, boostFPS)
+
+-- Credit
 local credit = Instance.new("TextLabel", main)
 credit.Size = UDim2.new(1, 0, 0, 15)
 credit.Position = UDim2.new(0, 0, 1, -15)
