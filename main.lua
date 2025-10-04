@@ -1,4 +1,4 @@
--- Performance Hub | Small UI like REDZ/Xeter | One Tab (X / -) | by Gonzales Official
+-- Performance Hub | Small UI like REDZ/Xeter One Tab (X / -) by Gonzales Official
 
 local plr = game:GetService("Players").LocalPlayer
 local gui = Instance.new("ScreenGui", plr:WaitForChild("PlayerGui"))
