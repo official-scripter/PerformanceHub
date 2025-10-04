@@ -1,4 +1,4 @@
--- Performance Hub | One Tab (X / -) | by Gonzales Official
+-- Performance Hub | Small UI like REDZ/open Gonzales Official
 
 local plr = game:GetService("Players").LocalPlayer
 local gui = Instance.new("ScreenGui", plr:WaitForChild("PlayerGui"))
@@ -74,7 +74,7 @@ local open = true
 toggleBtn.MouseButton1Click:Connect(function()
 	open = not open
 	toggleBtn.Text = open and "x" or "-"
-	content.Visible = open
+	content.Visible = not open
 end)
 
 -- Credit label
