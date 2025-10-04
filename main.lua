@@ -47,7 +47,7 @@ local function makeBtn(txt, posY, func)
 
 	local on = false
 	btn.MouseButton1Click:Connect(function()
-		on = on
+		on = not on
 		btn.Text = txt .. (on and " x" or " -")
 		btn.BackgroundColor3 = on and Color3.fromRGB(0, 180, 0) or Color3.fromRGB(50, 50, 50)
 		func(on)
@@ -73,8 +73,8 @@ local function boostFPS(active)
 end
 
 -- Create Buttons
-makeBtn("Anti-Lag", 60, antiLag)
-makeBtn("Boost FPS", 60, boostFPS)
+makeBtn("Anti-Lag", 30, antiLag)
+makeBtn("Boost FPS", 62, boostFPS)
 
 -- Credit
 local credit = Instance.new("TextLabel", main)
